@@ -1,36 +1,24 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import useInputs from '../custom/useInputs';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const onChangePassword2 = (e) => {
-    setPassword2(e.target.value);
-  };
+  const [state, onChange] = useInputs({
+    email: '',
+    name: '',
+    password: '',
+    password2: '',
+  });
+  const {email, name, password, password2} = state;
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     const registerUser = {
-      email: email,
-      name: name,
-      password: password,
-      password2: password2,
+      email: state.email,
+      name: state.name,
+      password: state.password,
+      password2: state.password2,
     };
     console.log(registerUser);
   };
@@ -54,11 +42,12 @@ const Register = () => {
             </label>
           </div>
           <input
+            name="email"
             type="email"
             value={email}
             placeholder="example@gmail.com"
             style={{width: '300px', height: '25px'}}
-            onChange={onChangeEmail}
+            onChange={onChange}
           />
         </div>
         <div>
@@ -73,11 +62,12 @@ const Register = () => {
             </label>
           </div>
           <input
+            name="name"
             type="name"
             value={name}
             placeholder="Input your name"
             style={{width: '300px', height: '25px'}}
-            onChange={onChangeName}
+            onChange={onChange}
           />
         </div>
         <div style={{marginTop: '20px'}}>
@@ -92,11 +82,12 @@ const Register = () => {
         </div>
         <div>
           <input
+            name="password"
             type="password"
             value={password}
             placeholder="Input your password"
             style={{width: '300px', height: '25px'}}
-            onChange={onChangePassword}
+            onChange={onChange}
           />
         </div>
         <div style={{marginTop: '20px'}}>
@@ -111,11 +102,12 @@ const Register = () => {
         </div>
         <div>
           <input
+            name="password2"
             type="password"
             value={password2}
             placeholder="Confirm Password"
             style={{width: '300px', height: '25px'}}
-            onChange={onChangePassword2}
+            onChange={onChange}
           />
         </div>
         <button

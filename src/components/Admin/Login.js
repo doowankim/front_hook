@@ -1,24 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
+import useInputs from '../custom/useInputs';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const [state, onChange] = useInputs({
+    email: '',
+    password: '',
+  });
+  const {email, password} = state;
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     const loginUser = {
-      email: email,
-      password: password,
+      email: state.email,
+      password: state.password,
     };
     console.log(loginUser);
   };
@@ -41,11 +37,12 @@ const Login = () => {
             </label>
           </div>
           <input
+            name="email"
             type="email"
             value={email}
             placeholder="example@gmail.com"
             style={{width: '300px', height: '25px'}}
-            onChange={onChangeEmail}
+            onChange={onChange}
           />
         </div>
         <div>
@@ -60,11 +57,12 @@ const Login = () => {
             </label>
           </div>
           <input
+            name="password"
             type="password"
             value={password}
             placeholder="*******"
             style={{width: '300px', height: '25px'}}
-            onChange={onChangePassword}
+            onChange={onChange}
           />
         </div>
         <button
