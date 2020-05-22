@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import useInputs from '../custom/useInputs';
+import FacebookLogin from 'react-facebook-login';
 
 const Login = () => {
   const [state, onChange] = useInputs({
@@ -17,6 +18,10 @@ const Login = () => {
       password: state.password,
     };
     console.log(loginUser);
+  };
+
+  const responseFacebook = () => {
+    console.log('responseFacebook');
   };
   return (
     <div style={{padding: '20px'}}>
@@ -84,6 +89,14 @@ const Login = () => {
         >
           If you don't have an email, Click here!
         </Link>
+        <div style={{marginTop: '10px'}}>
+          <FacebookLogin
+            appId="386257415464246"
+            textButton="Facebook"
+            fields="name,email,picture"
+            callback={responseFacebook}
+          />
+        </div>
       </form>
     </div>
   );
