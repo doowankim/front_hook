@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import useInputs from '../custom/useInputs';
 import FacebookLogin from 'react-facebook-login';
 import styled from 'styled-components';
@@ -10,6 +10,11 @@ const Login = () => {
     password: '',
   });
   const {email, password} = state;
+  const history = useHistory();
+  const routeChange = () => {
+    let path = '/register';
+    history.push(path);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -55,6 +60,9 @@ const Login = () => {
           </div>
           <Button type="submit">Confirm</Button>
           <SLink to="/register">If you don't have an email, Click here!</SLink>
+          <div>
+            <button onClick={routeChange}>Page Route</button>
+          </div>
           <Divider></Divider>
           <SocialButton>
             <FacebookLogin
